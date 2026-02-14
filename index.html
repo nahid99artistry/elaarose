@@ -20,7 +20,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
+            overflow: hidden; /* Prevents scrollbars during heart bursts */
             font-family: 'Poppins', sans-serif;
             color: white;
             padding: 20px;
@@ -248,10 +248,11 @@
 
     <audio id="nilVoice" src="voice.mp3"></audio>
 
-  const quotes = [
+    <script>
+        const quotes = [
             "Ela, two years of us and I still get the same butterflies I felt on day one. You’re my everything.",
             "Distance is just a test to see how far love can travel. My heart is already there with you, Sabiba.",
-            "I, Hasaan Shaharir Nil, promise to hold your heart safely, no matter how many miles are between us.",
+            "I’m, Hasaan Shaharir Nil, promise to hold your heart safely, no matter how many miles are between us.",
             "Elaaaaa, I’m counting down every second until 'goodnight' doesn't mean hanging up the phone.",
             "Two years of us, and I’m still head-over-heels obsessed with you. You are my queen, Sabiba Binte Ela.",
             "Sometimes I just stare at your pictures and smile like an idiot. I miss you so much, Ela.",
@@ -285,7 +286,6 @@
         let isTyping = false;
         let surpriseTriggered = false;
 
-        // Generate a random number for the surprise (between 4 and 10)
         const randomSurpriseTarget = Math.floor(Math.random() * (10 - 4 + 1)) + 4;
 
         function typeWriter(text, i, fnCallback) {
@@ -303,7 +303,6 @@
             if (isTyping) return;
             counter++;
             
-            // Trigger the surprise randomly once
             if (counter === randomSurpriseTarget && !surpriseTriggered) {
                 document.getElementById('bouquet-overlay').style.display = 'flex';
                 burstHearts(60);
