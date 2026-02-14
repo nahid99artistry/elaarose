@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Queen Ela</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rose-red: #ff3344;
+            --soft-pink: #ffb3b3;
+            --deep-maroon: #1a0101;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #2b0202 0%, #000 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #starField {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        #quote-container {
+            width: 100%;
+            max-width: 450px;
+            min-height: 140px;
+            text-align: center;
+            z-index: 10;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quote-text {
+            color: var(--soft-pink);
+            font-size: 1.05rem;
+            font-style: italic;
+            line-height: 1.6;
+            text-shadow: 0 0 10px rgba(255, 51, 68, 0.8);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            width: 100%;
+        }
+
+        .rose-wrapper {
+            width: 240px;
+            height: 240px;
+            margin: 0 auto;
+            position: relative;
+            filter: drop-shadow(0 0 40px rgba(255, 51, 68, 0.6));
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(3deg); }
+        }
+
+        .rose-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background-image: url('https://pngimg.com/uploads/rose/rose_PNG639.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .voice-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 5px;
+            background: rgba(255, 51, 68, 0.3);
+            border: 2px solid var(--rose-red);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            animation: pulse 2s infinite;
+            z-index: 15;
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 51, 68, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 51, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 51, 68, 0); }
+        }
+
+        .message h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: var(--rose-red);
+            margin: 15px 0 5px 0;
+            text-shadow: 0 0 20px rgba(255, 51, 68, 0.5);
+        }
+
+        .sub-text {
+            font-size: 0.8rem;
+            color: #ddd;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        #next-btn {
+            margin-top: 30px;
+            padding: 14px 40px;
+            background: linear-gradient(45deg, rgba(255, 51, 68, 0.2), rgba(255, 51, 68, 0.5));
+            border: 1px solid var(--rose-red);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+            transition: 0.3s;
+            width: 85%;
+            max-width: 280px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #bouquet-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 100;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            animation: fadeIn 2s forwards;
+        }
+
+        .flower-cluster { font-size: 6rem; animation: bloom 2.5s ease-out; }
+        
+        @keyframes bloom {
+            0% { transform: scale(0) rotate(-30deg); }
+            100% { transform: scale(1.3) rotate(0deg); }
+        }
+
+        .valentine-msg {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--rose-red);
+            margin-top: 20px;
+            text-shadow: 0 0 25px white;
+            padding: 0 15px;
+        }
+
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            z-index: 6;
+            animation: moveUp 3.5s linear forwards;
+        }
+
+        @keyframes moveUp {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+            100% { transform: translate(calc(-50% + var(--random-x)), -500px) scale(1.8); opacity: 0; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div id="starField"></div>
+
+    <div id="bouquet-overlay" onclick="this.style.display='none'">
+        <div class="flower-cluster">💐🌹🌷🌸🌺</div>
+        <h2 class="valentine-msg">Happy Valentine's Day,<br>Sabiba Binte Ela</h2>
+        <p style="font-family: 'Poppins'; font-size: 0.9rem; color: var(--soft-pink); margin-top: 20px;">
+            Hasaan Shaharir Nil ❤️ Ela <br> 
+            2 Beautiful Years. Forever to go! (Tap to continue)
+        </p>
+    </div>
+
+    <div id="quote-container">
+        <p class="quote-text" id="quote-display">Nil is sending his heart to Ela...</p>
+    </div>
+
+    <div class="container">
+        <div class="rose-wrapper">
+            <div class="rose-img"></div>
+            <button class="voice-btn" onclick="playVoice()" title="Listen to Nil">🎙️</button>
+        </div>
+
+        <div class="message">
+            <h1>Nil ❤️ Ela</h1>
+            <p class="sub-text">2 Beautiful Years Together</p>
+        </div>
+
+        <button id="next-btn" onclick="updateContent()">Next Love Note ✨</button>
+    </div>
+
+    <audio id="nilVoice" src="voice.mp3"></audio>
+
+    <script>
+        const quotes = [
+            "Ela, two years of us and I still get the same butterflies I felt on day one. You’re my everything.",
+            "Distance is just a test to see how far love can travel. My heart is already there with you, Sabiba.",
+            "Nil, promise to hold your heart safely, no matter how many miles are between us.",
+            "Elaaaaa, I’m counting down every second until 'goodnight' doesn't mean hanging up the phone.",
+            "Two years of us, and I’m still head-over-heels obsessed with you. You are my queen, Sabiba Binte Ela.",
+            "Sometimes I just stare at your pictures and smile like an idiot. I miss you so much, Ela.",
+            "You aren't just my girl; you're my best friend. Nil is nothing without his Ela.",
+            "I wish I could reach through this screen right now and pull you into a hug that lasts forever.",
+            "Hasaan Shaharir Nil belongs to only one girl, and her name is Sabiba Binte Ela. Today and forever.",
+            "Ela, thank you for being the most beautiful part of my life for the last 730 days.",
+            "I hate the distance, but I love YOU more than I hate the space between us. It's always been you, Ela.",
+            "Every time my phone vibrates, I hope it's a notification from you. You make my day brighter.",
+            "I’m sending you a million virtual kisses. Close your eyes and feel them—one for each second Nil misses you.",
+            "Sabiba Binte Ela, you are the prayer I didn't know I was saying, and the answer to every dream I've ever had.",
+            "Hasaan Shaharir Nil + Sabiba Binte Ela = A love story that distance can never break.",
+            "Two years down, and I’m ready for a hundred more. You're my forever person, Ela.",
+            "Every romantic song I hear makes sense now, because every lyric reminds me of you, Elaaaaa.",
+            "The miles between us are temporary, but the way I belong to you is permanent.",
+            "I don't just love you; I'm proud of you. Thank you for being mine for these two beautiful years, Sabiba Binte Ela.",
+            "Ela, just remember: no matter where I am, Nil is always thinking of you."
+        ];
+
+        let lastIndex = -1;
+        let counter = 0;
+
+        function updateContent() {
+            counter++;
+            
+            // Surprise on the 2nd click for your 2nd year!
+            if (counter === 2) {
+                document.getElementById('bouquet-overlay').style.display = 'flex';
+                burstHearts(50);
+            }
+
+            const display = document.getElementById('quote-display');
+            display.style.opacity = 0;
+            display.style.transform = "translateY(-10px)";
+
+            setTimeout(() => {
+                let newIndex;
+                do {
+                    newIndex = Math.floor(Math.random() * quotes.length);
+                } while (newIndex === lastIndex);
+                
+                lastIndex = newIndex;
+                display.innerText = quotes[newIndex];
+                display.style.opacity = 1;
+                display.style.transform = "translateY(0)";
+                
+                burstHearts(15);
+            }, 400);
+        }
+
+        function playVoice() {
+            const audio = document.getElementById('nilVoice');
+            audio.play().catch(() => {
+                alert("Please add 'voice.mp3' to your folder!");
+            });
+        }
+
+        function burstHearts(amount) {
+            for (let i = 0; i < amount; i++) {
+                setTimeout(createHeart, i * 40);
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = ['❤️', '💖', '💍', '✨', '🌹', '🌷', '🌸', '👑'][Math.floor(Math.random() * 8)];
+            heart.style.left = '50%';
+            heart.style.top = '50%';
+            heart.style.setProperty('--random-x', (Math.random() * 400 - 200) + 'px');
+            heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 3500);
+        }
+
+        window.onload = function() {
+            const starField = document.getElementById('starField');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.style.position = 'absolute';
+                star.style.width = Math.random() * 2 + 'px';
+                star.style.height = star.style.width;
+                star.style.background = 'white';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.opacity = Math.random();
+                starField.appendChild(star);
+            }
+            updateContent();
+        };
+    </script>
+</body>
+</html>
