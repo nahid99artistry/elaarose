@@ -53,7 +53,6 @@
             line-height: 1.6;
             text-shadow: 0 0 10px rgba(255, 51, 68, 0.8);
             transition: all 0.5s ease;
-            opacity: 0;
         }
 
         .container {
@@ -64,8 +63,8 @@
         }
 
         .rose-wrapper {
-            width: 240px;
-            height: 240px;
+            width: 200px;
+            height: 200px;
             margin: 0 auto;
             position: relative;
             filter: drop-shadow(0 0 40px rgba(255, 51, 68, 0.6));
@@ -87,21 +86,21 @@
             background-position: center;
         }
 
-        .voice-btn {
+        .voice-btn-circle {
             position: absolute;
-            bottom: 15px;
-            right: 5px;
+            bottom: 10px;
+            right: 0;
             background: rgba(255, 51, 68, 0.3);
             border: 2px solid var(--rose-red);
             color: white;
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             animation: pulse 2s infinite;
             z-index: 15;
             backdrop-filter: blur(5px);
@@ -115,21 +114,43 @@
 
         .message h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: var(--rose-red);
             margin: 15px 0 5px 0;
             text-shadow: 0 0 20px rgba(255, 51, 68, 0.5);
         }
 
         .sub-text {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #ddd;
             letter-spacing: 3px;
             text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .nil-voice-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--soft-pink);
+            color: var(--soft-pink);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Poppins';
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .nil-voice-bar:hover {
+            background: rgba(255, 51, 68, 0.2);
+            transform: scale(1.05);
         }
 
         #next-btn {
-            margin-top: 30px;
+            margin-top: 10px;
             padding: 14px 40px;
             background: linear-gradient(45deg, rgba(255, 51, 68, 0.2), rgba(255, 51, 68, 0.5));
             border: 1px solid var(--rose-red);
@@ -156,23 +177,23 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            animation: fadeIn 2s forwards;
+            animation: fadeIn 1s forwards;
+            padding: 20px;
         }
 
-        .flower-cluster { font-size: 6rem; animation: bloom 2.5s ease-out; }
+        .flower-cluster { font-size: 5rem; animation: bloom 2s ease-out; }
         
         @keyframes bloom {
-            0% { transform: scale(0) rotate(-30deg); }
-            100% { transform: scale(1.3) rotate(0deg); }
+            0% { transform: scale(0) rotate(-45deg); }
+            100% { transform: scale(1.2) rotate(0deg); }
         }
 
         .valentine-msg {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--rose-red);
             margin-top: 20px;
             text-shadow: 0 0 25px white;
-            padding: 0 15px;
         }
 
         .heart {
@@ -184,7 +205,7 @@
 
         @keyframes moveUp {
             0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
-            100% { transform: translate(calc(-50% + var(--random-x)), -500px) scale(1.8); opacity: 0; }
+            100% { transform: translate(calc(-50% + var(--random-x)), -600px) scale(2); opacity: 0; }
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -199,23 +220,27 @@
         <h2 class="valentine-msg">Happy Valentine's Day,<br>Sabiba Binte Ela</h2>
         <p style="font-family: 'Poppins'; font-size: 0.9rem; color: var(--soft-pink); margin-top: 20px;">
             Hasaan Shaharir Nil ❤️ Ela <br> 
-            2 Beautiful Years. Forever to go! (Tap to continue)
+            Forever to go! (Tap to close)
         </p>
     </div>
 
     <div id="quote-container">
-        <p class="quote-text" id="quote-display">Nil is sending his heart to Ela...</p>
+        <p class="quote-text" id="quote-display"></p>
     </div>
 
     <div class="container">
         <div class="rose-wrapper">
             <div class="rose-img"></div>
-            <button class="voice-btn" onclick="playVoice()" title="Listen to Nil">🎙️</button>
+            <button class="voice-btn-circle" onclick="playVoice()" title="Listen to Nil">🎙️</button>
         </div>
 
         <div class="message">
             <h1>Nil ❤️ Ela</h1>
             <p class="sub-text">2 Beautiful Years Together</p>
+            
+            <button class="nil-voice-bar" onclick="playVoice()">
+                <span>🔊 Hear Nil's Voice</span>
+            </button>
         </div>
 
         <button id="next-btn" onclick="updateContent()">Next Love Note ✨</button>
@@ -227,7 +252,7 @@
         const quotes = [
             "Ela, two years of us and I still get the same butterflies I felt on day one. You’re my everything.",
             "Distance is just a test to see how far love can travel. My heart is already there with you, Sabiba.",
-            "Nil, promise to hold your heart safely, no matter how many miles are between us.",
+            "I, Hasaan Shaharir Nil, promise to hold your heart safely, no matter how many miles are between us.",
             "Elaaaaa, I’m counting down every second until 'goodnight' doesn't mean hanging up the phone.",
             "Two years of us, and I’m still head-over-heels obsessed with you. You are my queen, Sabiba Binte Ela.",
             "Sometimes I just stare at your pictures and smile like an idiot. I miss you so much, Ela.",
@@ -244,50 +269,64 @@
             "Every romantic song I hear makes sense now, because every lyric reminds me of you, Elaaaaa.",
             "The miles between us are temporary, but the way I belong to you is permanent.",
             "I don't just love you; I'm proud of you. Thank you for being mine for these two beautiful years, Sabiba Binte Ela.",
-            "Ela, just remember: no matter where I am, Nil is always thinking of you."
+            "Ela, just remember: no matter where I am, Hasaan Shaharir Nil is always thinking of you."
         ];
 
         let lastIndex = -1;
         let counter = 0;
+        let isTyping = false;
+        let surpriseTriggered = false;
+
+        // Generate a random number for the surprise (between 4 and 10)
+        const randomSurpriseTarget = Math.floor(Math.random() * (10 - 4 + 1)) + 4;
+
+        function typeWriter(text, i, fnCallback) {
+            if (i < text.length) {
+                document.getElementById("quote-display").innerHTML = text.substring(0, i+1) +'<span style="color:red">|</span>';
+                setTimeout(function() {
+                    typeWriter(text, i + 1, fnCallback)
+                }, 40);
+            } else if (typeof fnCallback == 'function') {
+                setTimeout(fnCallback, 500);
+            }
+        }
 
         function updateContent() {
+            if (isTyping) return;
             counter++;
             
-            // Surprise on the 2nd click for your 2nd year!
-            if (counter === 2) {
+            // Trigger the surprise randomly once
+            if (counter === randomSurpriseTarget && !surpriseTriggered) {
                 document.getElementById('bouquet-overlay').style.display = 'flex';
-                burstHearts(50);
+                burstHearts(60);
+                surpriseTriggered = true;
             }
 
-            const display = document.getElementById('quote-display');
-            display.style.opacity = 0;
-            display.style.transform = "translateY(-10px)";
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * quotes.length);
+            } while (newIndex === lastIndex);
+            lastIndex = newIndex;
 
-            setTimeout(() => {
-                let newIndex;
-                do {
-                    newIndex = Math.floor(Math.random() * quotes.length);
-                } while (newIndex === lastIndex);
-                
-                lastIndex = newIndex;
-                display.innerText = quotes[newIndex];
-                display.style.opacity = 1;
-                display.style.transform = "translateY(0)";
-                
-                burstHearts(15);
-            }, 400);
+            isTyping = true;
+            typeWriter(quotes[newIndex], 0, function(){
+                isTyping = false;
+                document.getElementById("quote-display").innerHTML = quotes[newIndex];
+            });
+            
+            burstHearts(15);
         }
 
         function playVoice() {
             const audio = document.getElementById('nilVoice');
             audio.play().catch(() => {
-                alert("Please add 'voice.mp3' to your folder!");
+                alert("Make sure 'voice.mp3' is in the same folder as this file!");
             });
         }
 
         function burstHearts(amount) {
             for (let i = 0; i < amount; i++) {
-                setTimeout(createHeart, i * 40);
+                setTimeout(createHeart, i * 30);
             }
         }
 
@@ -297,15 +336,15 @@
             heart.innerHTML = ['❤️', '💖', '💍', '✨', '🌹', '🌷', '🌸', '👑'][Math.floor(Math.random() * 8)];
             heart.style.left = '50%';
             heart.style.top = '50%';
-            heart.style.setProperty('--random-x', (Math.random() * 400 - 200) + 'px');
-            heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+            heart.style.setProperty('--random-x', (Math.random() * 500 - 250) + 'px');
+            heart.style.fontSize = (Math.random() * 30 + 15) + 'px';
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 3500);
         }
 
         window.onload = function() {
             const starField = document.getElementById('starField');
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 120; i++) {
                 const star = document.createElement('div');
                 star.style.position = 'absolute';
                 star.style.width = Math.random() * 2 + 'px';
